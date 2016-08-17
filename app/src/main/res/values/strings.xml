@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">VotetaWorkout</string>
+    <string name="go">GO!</string>
+    <string name="my_workouts">My Workouts</string>
+    <string name="about">About</string>
+    <string name="exit">Exit</string>
+</resources>
