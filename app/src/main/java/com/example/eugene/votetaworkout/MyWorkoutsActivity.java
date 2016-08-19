@@ -12,9 +12,9 @@ public class MyWorkoutsActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_workouts);
 
-        String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
-                "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-                "Linux", "OS/2" };
+        String[] values = new String[] { "Workout1", "Workout2", "Workout3",
+                "Workout4", "Workout5", "Workout6", "Workout7", "Workout 8",
+                "Workout 9", "Workout 10" };
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                R.layout.workout_listview, values);
