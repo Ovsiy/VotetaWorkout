@@ -3,19 +3,30 @@
           package="com.example.eugene.votetaworkout">
 
     <application
+            android:name=".WorkoutApplication"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:supportsRtl="true"
             android:theme="@style/Base.Theme.AppCompat">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".MyWorkoutsActivity">
+        <activity android:name=".activity.MyWorkoutsActivity">
+        </activity>
+        <activity android:name=".activity.AddExerciseActivity">
+        </activity>
+        <activity android:name=".activity.AddWorkoutActivity">
+        </activity>
+        <activity android:name=".activity.CreateExerciseActivity">
+        </activity>
+        <activity
+                android:name=".activity.CategoryPickActivity"
+                android:label="@string/title_activity_category_pick">
         </activity>
     </application>
 

@@ -1,0 +1,2 @@
+INSERT INTO category (id, name) VALUES (1, "Arms"), (2, "Chest"), (3, "Legs"), (4, "Shoulders"), (5, "Back");
+INSERT INTO exercise (name, description, category_id) VALUES ("Dumbell bench press", "Dumbell bench press", 2), ("Leg press", "Leg press", 3), ("Barbell biceps curl", "Barbell biceps curl", 1), ("Standing calf raise", "Standing calf raise", 3);
