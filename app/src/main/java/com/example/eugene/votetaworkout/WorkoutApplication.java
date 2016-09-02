@@ -30,14 +30,14 @@ public class WorkoutApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        for (int i = 0; i < 5; i++) {
-            try {
-                Thread.sleep(1000);
-                Log.i("WAIT", "waiting...");
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+//        for (int i = 0; i < 5; i++) {
+//            try {
+//                Thread.sleep(1000);
+//                Log.i("WAIT", "waiting...");
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
         boolean dbExists = this.getDatabasePath("workout.db").exists();
         getHelper().getWritableDatabase();
