@@ -24,7 +24,6 @@ public class AddExerciseActivity extends Activity {
 
         Button createExcerciseButton = (Button) findViewById(R.id.button_create_exercise);
         createExcerciseButton.setOnClickListener(createExerciseListener);
-
     }
 
     private View.OnClickListener createExerciseListener = new View.OnClickListener() {

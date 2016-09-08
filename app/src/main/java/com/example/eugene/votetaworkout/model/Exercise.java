@@ -1,6 +1,8 @@
 package com.example.eugene.votetaworkout.model;
 
+import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
 /**
@@ -22,6 +24,9 @@ public class Exercise {
 
     @DatabaseField(columnName = "category_id",foreign = true, foreignAutoRefresh = true)
     private Category category;
+
+    @ForeignCollectionField(columnName =  "exercise_instances", eager = true)
+    private ForeignCollection<ExerciseInstance> exerciseInstances;
 
     public Exercise() {
     }
@@ -62,5 +67,13 @@ public class Exercise {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public ForeignCollection<ExerciseInstance> getExerciseInstances() {
+        return exerciseInstances;
+    }
+
+    public void setExerciseInstances(ForeignCollection<ExerciseInstance> exerciseInstances) {
+        this.exerciseInstances = exerciseInstances;
     }
 }

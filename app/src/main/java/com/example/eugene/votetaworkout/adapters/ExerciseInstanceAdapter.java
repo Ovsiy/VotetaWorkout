@@ -5,46 +5,42 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.TextView;
 import com.example.eugene.votetaworkout.R;
-import com.example.eugene.votetaworkout.model.Exercise;
+import com.example.eugene.votetaworkout.model.ExerciseInstance;
 
 import java.util.List;
 
 /**
- * Exercise Adapter
+ * Exercise Instance Adapter
  *
  * @author Eugene Ovsiy
- * @since 2.09.2016
+ * @since 5.09.2016
  */
-public class ExerciseAdapter extends BaseAdapter {
+public class ExerciseInstanceAdapter extends BaseAdapter {
+
     private Context context;
-    private List<Exercise> exercises;
+    private List<ExerciseInstance> exerciseInstances;
     private LayoutInflater layoutInflater;
 
-    public ExerciseAdapter(Context context, List<Exercise> exercises) {
-        this.exercises = exercises;
+    public ExerciseInstanceAdapter(Context context, List<ExerciseInstance> exerciseInstances) {
+        this.exerciseInstances = exerciseInstances;
         this.context = context;
         this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public int getCount() {
-        return exercises.size();
+        return exerciseInstances.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return exercises.get(position);
+        return exerciseInstances.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return exercises.get(position).getId();
-    }
-
-    private Exercise getExercise(int position) {
-        return (Exercise) getItem(position);
+        return exerciseInstances.get(position).getId();
     }
 
     @Override
@@ -53,8 +49,6 @@ public class ExerciseAdapter extends BaseAdapter {
         if (view == null) {
             view = layoutInflater.inflate(R.layout.exercise_listview, parent, false);
         }
-        Exercise exercise = getExercise(position);
-        ((TextView) view.findViewById(R.id.name)).setText(exercise.getName());
 
         return view;
     }

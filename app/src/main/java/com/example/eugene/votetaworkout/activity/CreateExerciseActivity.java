@@ -64,6 +64,5 @@ public class CreateExerciseActivity extends Activity implements CategoryFragment
         fTrans.detach(exerciseFragment);
         fTrans.add(R.id.fragmentPicker, createExerciseFormFragment);
         fTrans.commit();
-//        Toast.makeText(this, "Clicked "+ id, Toast.LENGTH_LONG).show();
     }
 }

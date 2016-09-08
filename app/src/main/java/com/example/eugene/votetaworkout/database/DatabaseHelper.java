@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.eugene.votetaworkout.R;
 import com.example.eugene.votetaworkout.model.Category;
 import com.example.eugene.votetaworkout.model.Exercise;
+import com.example.eugene.votetaworkout.model.ExerciseInstance;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
@@ -27,6 +28,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private Dao<Exercise, Integer> exerciseDao = null;
     private Dao<Category, Integer> categoryDao = null;
+    private Dao<ExerciseInstance, Integer> exerciseInstance = null;
 
     private Context context;
 
@@ -48,6 +50,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         try {
             TableUtils.createTable(connectionSource, Exercise.class);
             TableUtils.createTable(connectionSource, Category.class);
+            TableUtils.createTable(connectionSource, ExerciseInstance.class);
 
             InputStream is = context.getResources().openRawResource(R.raw.exercises);
             DataInputStream in = new DataInputStream(is);
@@ -86,5 +89,13 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         }
 
         return categoryDao;
+    }
+
+    public Dao<ExerciseInstance, Integer> getExerciseInstanceDao() throws SQLException {
+        if (exerciseInstance == null) {
+            exerciseInstance = getDao(ExerciseInstance.class);
+        }
+
+        return exerciseInstance;
     }
 }
