@@ -9,13 +9,13 @@
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher">
+        android:src="@mipmap/ic_launcher"
+        android:paddingLeft="30dp">
     </ImageView>
     <TextView
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dip"
-        android:textSize="30sp"
+        android:text="Test bla-bla"
         android:textStyle="bold"/>
 </LinearLayout>
