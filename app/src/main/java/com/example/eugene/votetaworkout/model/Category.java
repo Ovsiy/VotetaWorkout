@@ -5,6 +5,9 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Category model class
  *
@@ -21,6 +24,15 @@ public class Category {
 
     @ForeignCollectionField(columnName =  "emails", eager = true)
     private ForeignCollection<Exercise> exercises;
+
+    public List<ExerciseInstance> getInstances() {
+        List<ExerciseInstance> instances = new ArrayList<>();
+        for (Exercise exercise : exercises) {
+            instances.addAll(exercise.getExerciseInstances());
+        }
+
+        return instances;
+    }
 
     public Category() {
     }

@@ -13,14 +13,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.example.eugene.votetaworkout.R;
-import com.example.eugene.votetaworkout.activity.AddExerciseActivity;
+import com.example.eugene.votetaworkout.activity.AddWorkoutActivity;
 import com.example.eugene.votetaworkout.database.DatabaseHelper;
 import com.example.eugene.votetaworkout.model.Exercise;
 import com.example.eugene.votetaworkout.model.ExerciseInstance;
 
 import java.sql.SQLException;
 
-public class CreateExerciseFormFragment extends Fragment {
+public class ExerciseFormFragment extends Fragment {
     private Exercise exercise;
 
     @Override
@@ -61,7 +61,7 @@ public class CreateExerciseFormFragment extends Fragment {
 
             try {
                 DatabaseHelper.getDatabaseHelper(getActivity()).getExerciseInstanceDao().create(exerciseInstance);
-                Intent in = new Intent(getActivity(), AddExerciseActivity.class);
+                Intent in = new Intent(getActivity(), AddWorkoutActivity.class);
                 startActivity(in);
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -69,12 +69,12 @@ public class CreateExerciseFormFragment extends Fragment {
         }
     };
 
-    public void setExerciseName(String name) {
+    private void setExerciseName(String name) {
        TextView textView = (TextView) getView().findViewById(R.id.name);
        textView.setText(name);
    }
 
-   public void setExerciseDescription(String description) {
+    private void setExerciseDescription(String description) {
        TextView textView = (TextView) getView().findViewById(R.id.description);
        textView.setText(description);
    }
