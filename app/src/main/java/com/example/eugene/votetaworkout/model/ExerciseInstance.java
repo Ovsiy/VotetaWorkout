@@ -65,4 +65,15 @@ public class ExerciseInstance {
     public void setExercise(Exercise exercise) {
         this.exercise = exercise;
     }
+
+    @Override
+    public String toString() {
+        return "ExerciseInstance{" +
+                "id=" + id +
+                ", sets=" + sets +
+                ", weight=" + weight +
+                ", reps=" + reps +
+                ", exercise=" + exercise +
+                '}';
+    }
 }
