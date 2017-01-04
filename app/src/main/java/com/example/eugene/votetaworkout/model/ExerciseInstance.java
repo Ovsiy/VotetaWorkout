@@ -65,4 +65,40 @@ public class ExerciseInstance {
     public void setExercise(Exercise exercise) {
         this.exercise = exercise;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ExerciseInstance instance = (ExerciseInstance) o;
+
+        if (id != instance.id) return false;
+        if (sets != instance.sets) return false;
+        if (weight != instance.weight) return false;
+        if (reps != instance.reps) return false;
+        return exercise != null ? exercise.equals(instance.exercise) : instance.exercise == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + sets;
+        result = 31 * result + weight;
+        result = 31 * result + reps;
+        result = 31 * result + (exercise != null ? exercise.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "ExerciseInstance{" +
+                "id=" + id +
+                ", sets=" + sets +
+                ", weight=" + weight +
+                ", reps=" + reps +
+                ", exercise=" + exercise +
+                '}';
+    }
 }

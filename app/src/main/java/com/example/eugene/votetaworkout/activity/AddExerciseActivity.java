@@ -1,13 +1,13 @@
 package com.example.eugene.votetaworkout.activity;
 
-import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import com.example.eugene.votetaworkout.R;
 import com.example.eugene.votetaworkout.fragment.ExerciseFormFragment;
 import com.example.eugene.votetaworkout.fragment.ExercisePickFragment;
 
-public class AddExerciseActivity extends Activity implements ExercisePickFragment.OnExerciseSelected {
+public class AddExerciseActivity extends AppCompatActivity implements ExercisePickFragment.OnExerciseSelected {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

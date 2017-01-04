@@ -78,7 +78,7 @@ public class ExerciseInstanceExpandableAdapter extends BaseExpandableListAdapter
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         View view = convertView;
         if (view == null) {
-            view = layoutInflater.inflate(R.layout.listview_exercise_instance, parent, false);
+            view = layoutInflater.inflate(R.layout.listview_exercise_instance_selector, parent, false);
         }
         ExerciseInstance exerciseInstance = getChild(groupPosition, childPosition);
 
