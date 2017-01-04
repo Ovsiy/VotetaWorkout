@@ -2,6 +2,7 @@ package com.example.eugene.votetaworkout.activity;
 
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -94,9 +95,12 @@ public class AddWorkoutActivity extends AppCompatActivity {
 
             if(parent.isItemChecked(index)) {
                 parent.setItemChecked(index, false);
+//                v.setBackgroundColor(Color.TRANSPARENT);
                 instances.remove(instance);
             } else {
                 parent.setItemChecked(index, true);
+//                parent.setSelectedChild(groupPosition, childPosition, false);
+//                v.setBackgroundColor(Color.RED);
                 instances.add(instance);
             }
 
