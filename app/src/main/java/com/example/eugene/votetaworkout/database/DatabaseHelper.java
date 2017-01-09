@@ -2,10 +2,9 @@ package com.example.eugene.votetaworkout.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import com.example.eugene.votetaworkout.ExerciseInstanceDao;
 import com.example.eugene.votetaworkout.R;
-import com.example.eugene.votetaworkout.model.Category;
-import com.example.eugene.votetaworkout.model.Exercise;
-import com.example.eugene.votetaworkout.model.ExerciseInstance;
+import com.example.eugene.votetaworkout.model.*;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
@@ -28,7 +27,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private Dao<Exercise, Integer> exerciseDao = null;
     private Dao<Category, Integer> categoryDao = null;
-    private Dao<ExerciseInstance, Integer> exerciseInstance = null;
+    private ExerciseInstanceDao exerciseInstanceDao = null;
+    private Dao<Workout, Integer> workoutDao = null;
+    private Dao<WorkoutExerciseInstance, Integer> workoutExerciseInstanceDao = null;
 
     private Context context;
 
@@ -51,6 +52,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, Exercise.class);
             TableUtils.createTable(connectionSource, Category.class);
             TableUtils.createTable(connectionSource, ExerciseInstance.class);
+            TableUtils.createTable(connectionSource, Workout.class);
+            TableUtils.createTable(connectionSource, WorkoutExerciseInstance.class);
 
             InputStream is = context.getResources().openRawResource(R.raw.exercises);
             DataInputStream in = new DataInputStream(is);
@@ -91,11 +94,28 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return categoryDao;
     }
 
-    public Dao<ExerciseInstance, Integer> getExerciseInstanceDao() throws SQLException {
-        if (exerciseInstance == null) {
-            exerciseInstance = getDao(ExerciseInstance.class);
+    public ExerciseInstanceDao getExerciseInstanceDao() throws SQLException {
+        if (exerciseInstanceDao == null) {
+//            exerciseInstanceDao = getDao(ExerciseInstance.class);
+            exerciseInstanceDao = new ExerciseInstanceDao(connectionSource, ExerciseInstance.class);
         }
 
-        return exerciseInstance;
+        return exerciseInstanceDao;
+    }
+
+    public Dao<Workout, Integer> getWorkoutDao() throws SQLException {
+        if (workoutDao == null) {
+            workoutDao = getDao(Workout.class);
+        }
+
+        return workoutDao;
+    }
+
+    public Dao<WorkoutExerciseInstance, Integer> getWorkoutExerciseInstanceDao() throws SQLException {
+        if (workoutExerciseInstanceDao == null) {
+            workoutExerciseInstanceDao = getDao(WorkoutExerciseInstance.class);
+        }
+
+        return workoutExerciseInstanceDao;
     }
 }

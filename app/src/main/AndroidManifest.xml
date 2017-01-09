@@ -15,12 +15,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MyWorkoutsActivity">
-        </activity>
-        <activity android:name=".activity.AddExerciseActivity">
-        </activity>
-        <activity android:name=".activity.AddWorkoutActivity">
-        </activity>
+        <activity android:name=".activity.MyWorkoutsActivity"/>
+        <activity android:name=".activity.AddExerciseActivity"/>
+        <activity android:name=".activity.AddWorkoutActivity"/>
+        <activity android:name=".activity.GoActivity"/>
+        <activity android:name=".activity.WorkoutActivity"/>
     </application>
 
 </manifest>

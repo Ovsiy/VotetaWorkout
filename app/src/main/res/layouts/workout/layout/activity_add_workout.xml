@@ -6,14 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".activity.AddWorkoutActivity">
 
-    <ExpandableListView
+    <GridView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:choiceMode="multipleChoice"
-        android:id="@+id/instancesExpandableList"
-        android:layout_centerHorizontal="true"
-        tools:listitem="@layout/listview_category"
-        android:layout_above="@+id/buttons_placeholder"/>
+        android:id="@+id/exercise_instances_grid"
+        android:numColumns="3"
+        android:choiceMode="multipleChoiceModal"
+        android:layout_alignParentBottom="true"/>
 
     <RelativeLayout
         android:id="@+id/buttons_placeholder"
@@ -41,7 +40,7 @@
             android:layout_gravity="end"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="@dimen/text_margin"/>
+            android:layout_marginEnd="@dimen/text_margin"/>
 
     </RelativeLayout>
 

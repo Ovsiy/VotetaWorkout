@@ -1,10 +1,8 @@
 apply plugin: 'com.android.application'
-//apply plugin: 'com.android.library'
-apply plugin: 'com.jakewharton.butterknife'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.1"
 
     defaultConfig {
         applicationId "com.example.eugene.votetaworkout"
@@ -35,9 +33,12 @@ android {
 }
 
 ext {
-    supportLibVersion = '24.2.1'
+    supportLibVersion = '25.1.0'
     butterKnifeVersion = '8.4.0'
 }
+
+//apply plugin: 'android-apt'
+
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -50,4 +51,5 @@ dependencies {
     compile "com.android.support:recyclerview-v7:${supportLibVersion}"
     compile "com.jakewharton:butterknife:${butterKnifeVersion}"
     annotationProcessor "com.jakewharton:butterknife-compiler:${butterKnifeVersion}"
+//    apt 'com.jakewharton:butterknife-compiler:8.4.0'
 }

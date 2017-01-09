@@ -8,18 +8,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.ExpandableListView;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnItemClick;
 import com.example.eugene.votetaworkout.R;
-import com.example.eugene.votetaworkout.adapters.ExerciseExpandableAdapter;
+import com.example.eugene.votetaworkout.adapters.ExerciseAdapter;
 import com.example.eugene.votetaworkout.database.DatabaseHelper;
-import com.example.eugene.votetaworkout.model.Category;
+import com.example.eugene.votetaworkout.model.Exercise;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ExercisePickFragment extends Fragment {
-    OnExerciseSelected listener;
+    private OnExerciseSelected listener;
+
+    @BindView(R.id.exercisesGrid)
+    GridView exerciseGridView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,36 +34,39 @@ public class ExercisePickFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_exercise_pick, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_exercise_pick, container, false);
+        ButterKnife.bind(this, view);
+
+        return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        List<Category> categories = new ArrayList<>();
+        List<Exercise> exercises = new ArrayList<>();
 
         try {
-            categories = DatabaseHelper.getDatabaseHelper(getActivity()).getCategoryDao().queryForAll();
+            exercises = DatabaseHelper.getDatabaseHelper((getActivity())).getExerciseDao().queryForEq("category_id", getArguments().get("categoryId"));
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        ExpandableListView instancesListView = (ExpandableListView) getActivity().findViewById(R.id.exercisesExpandableList);
-        ExerciseExpandableAdapter adapter = new ExerciseExpandableAdapter(getActivity(), categories);
-        instancesListView.setAdapter(adapter);
+        ExerciseAdapter adapter = new ExerciseAdapter(exercises, getActivity());
 
-        instancesListView.setOnChildClickListener(onChildClickListener);
+        exerciseGridView.setAdapter(adapter);
     }
 
-    private ExpandableListView.OnChildClickListener onChildClickListener = new ExpandableListView.OnChildClickListener() {
-        @Override
-        public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-            listener.onExerciseSelected(id);
+    @OnItemClick(R.id.exercisesGrid)
+    void onExerciseClick(AdapterView<?> adapterView, View view, int position, long id) {
+        listener.onExerciseSelected(id);
+    }
 
-            return false;
+    private GridView.OnItemClickListener onExerciseClickListener = new GridView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+            listener.onExerciseSelected(id);
         }
     };
 

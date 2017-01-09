@@ -1,20 +1,24 @@
 package com.example.eugene.votetaworkout.activity;
 
 import android.content.Intent;
-import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.View;
-import android.widget.AbsListView;
-import android.widget.ExpandableListView;
+import android.widget.*;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.OnItemClick;
 import com.example.eugene.votetaworkout.R;
-import com.example.eugene.votetaworkout.adapters.ExerciseInstanceExpandableAdapter;
+import com.example.eugene.votetaworkout.adapters.ExerciseInstanceAdapter;
 import com.example.eugene.votetaworkout.database.DatabaseHelper;
-import com.example.eugene.votetaworkout.model.Category;
 import com.example.eugene.votetaworkout.model.ExerciseInstance;
+import com.example.eugene.votetaworkout.model.Workout;
+import com.example.eugene.votetaworkout.model.WorkoutExerciseInstance;
+import com.j256.ormlite.dao.Dao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,31 +28,55 @@ import java.util.Set;
 
 public class AddWorkoutActivity extends AppCompatActivity {
 
-    private Set<ExerciseInstance> instances = new HashSet<>();
-    private int backgroundColor;
+    private Set<ExerciseInstance> selectedInstances = new HashSet<>();
+
+    @BindView(R.id.exercise_instances_grid)
+    GridView instancesGridView;
+
+    @BindView(R.id.button_add_exercise)
+    FloatingActionButton addExerciseButton;
+
+    @BindView(R.id.button_save_workout)
+    FloatingActionButton saveWorkoutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_workout);
+        ButterKnife.bind(this);
 
-        List<Category> categories = new ArrayList<>();
+        List<ExerciseInstance> instances = new ArrayList<>();
 
         try {
-            categories = DatabaseHelper.getDatabaseHelper(this).getCategoryDao().queryForAll();
+            instances = DatabaseHelper.getDatabaseHelper(this).getExerciseInstanceDao().queryForAll();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        ExpandableListView instancesListView = (ExpandableListView) findViewById(R.id.instancesExpandableList);
-        instancesListView.setOnChildClickListener(onChildClickListener);
-        ExerciseInstanceExpandableAdapter adapter = new ExerciseInstanceExpandableAdapter(this, categories);
-        instancesListView.setAdapter(adapter);
+        ExerciseInstanceAdapter adapter = new ExerciseInstanceAdapter(this, instances);
+        instancesGridView.setAdapter(adapter);
+    }
 
-        instancesListView.setOnScrollListener(onScrollListener);
+    @OnItemClick(R.id.exercise_instances_grid)
+    void onExerciseInstanceClick(AdapterView<?> adapterView, View view, int position, long id) {
+        Toast.makeText(getApplicationContext(), "checked", Toast.LENGTH_LONG).show();
 
-        FloatingActionButton addExerciseButton = (FloatingActionButton) findViewById(R.id.button_add_exercise);
-        addExerciseButton.setOnClickListener(addExerciseListener);
+        CheckBox checkbox = (CheckBox) view.findViewById(R.id.exercise_instance_checkbox);
+        ExerciseInstance instance = (ExerciseInstance) adapterView.getItemAtPosition(position);
+
+        if (!checkbox.isChecked()) {
+            checkbox.toggle();
+            selectedInstances.add(instance);
+        } else {
+            checkbox.toggle();
+            selectedInstances.remove(instance);
+        }
+    }
+
+    @OnClick(R.id.button_add_exercise)
+    void onAddExerciseClick(View view) {
+        Intent in = new Intent(getApplicationContext(), AddExerciseActivity.class);
+        startActivity(in);
     }
 
     @Override
@@ -58,73 +86,41 @@ public class AddWorkoutActivity extends AppCompatActivity {
     }
 
     private AbsListView.OnScrollListener onScrollListener = new AbsListView.OnScrollListener() {
-
         @Override
         public void onScrollStateChanged(AbsListView absListView, int i) {
             FloatingActionButton addExerciseButton = (FloatingActionButton) absListView.getRootView().findViewById(R.id.button_add_exercise);
-//            View buttonsPlaceholder = absListView.getRootView().findViewById(R.id.buttons_placeholder);
 
             switch (i) {
                 case SCROLL_STATE_IDLE:
                     addExerciseButton.show();
-//                    buttonsPlaceholder.setBackgroundColor(getBackgroundColor());
-//                    buttonsPlaceholder.setVisibility(View.VISIBLE);
                     break;
                 case SCROLL_STATE_FLING: case SCROLL_STATE_TOUCH_SCROLL:
-//                    buttonsPlaceholder.setVisibility(View.INVISIBLE);
-//                    buttonsPlaceholder.setBackgroundColor(Color.TRANSPARENT);
                     addExerciseButton.hide();
                     break;
             }
         }
 
         @Override
-        public void onScroll(AbsListView absListView, int i, int i1, int i2) {
-
-        }
+        public void onScroll(AbsListView absListView, int i, int i1, int i2) {};
     };
 
-    private ExpandableListView.OnChildClickListener onChildClickListener = new ExpandableListView.OnChildClickListener() {
-        @Override
-        public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-            int index = parent.getFlatListPosition(ExpandableListView
-                    .getPackedPositionForChild(groupPosition, childPosition));
-            ExerciseInstanceExpandableAdapter adapter = (ExerciseInstanceExpandableAdapter) parent.getExpandableListAdapter();
+    @OnClick(R.id.button_save_workout)
+    void onAddWorkoutButtonClick(View view) {
+        Workout workout = new Workout();
+        workout.setName("Workout1");
 
-            ExerciseInstance instance = adapter.getChild(groupPosition, childPosition);
+        try {
+            Dao<Workout, Integer> workoutDao = DatabaseHelper.getDatabaseHelper(this).getWorkoutDao();
+            Dao<WorkoutExerciseInstance, Integer> workoutExerciseInstanceDao = DatabaseHelper.getDatabaseHelper(this).getWorkoutExerciseInstanceDao();
+            workoutDao.create(workout);
 
-            if(parent.isItemChecked(index)) {
-                parent.setItemChecked(index, false);
-//                v.setBackgroundColor(Color.TRANSPARENT);
-                instances.remove(instance);
-            } else {
-                parent.setItemChecked(index, true);
-//                parent.setSelectedChild(groupPosition, childPosition, false);
-//                v.setBackgroundColor(Color.RED);
-                instances.add(instance);
+            for (ExerciseInstance instance : selectedInstances) {
+                WorkoutExerciseInstance workoutExerciseInstance = new WorkoutExerciseInstance(workout, instance);
+                workoutExerciseInstanceDao.create(workoutExerciseInstance);
             }
-
-            return false;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    };
-
-    private View.OnClickListener addExerciseListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent in = new Intent(getApplicationContext(), AddExerciseActivity.class);
-            startActivity(in);
-        }
-    };
-
-    private int getBackgroundColor() {
-        if (backgroundColor == 0) {
-            TypedArray array = getTheme().obtainStyledAttributes(new int[] {
-                    android.R.attr.colorBackground,
-            });
-
-            backgroundColor = array.getColor(0, 0xFF00FF);
-
-            return backgroundColor;
-        } else return backgroundColor;
     }
+
 }

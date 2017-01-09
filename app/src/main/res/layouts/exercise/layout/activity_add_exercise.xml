@@ -6,15 +6,6 @@
         android:layout_height="match_parent"
         tools:context=".activity.AddExerciseActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Choose exercise"
-        android:id="@+id/textView"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"/>
-    
     <RelativeLayout
         android:id="@+id/fragmentPicker"
         android:layout_width="match_parent"
