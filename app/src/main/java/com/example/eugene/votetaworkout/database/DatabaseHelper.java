@@ -2,7 +2,7 @@ package com.example.eugene.votetaworkout.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import com.example.eugene.votetaworkout.ExerciseInstanceDao;
+import com.example.eugene.votetaworkout.dao.ExerciseInstanceDao;
 import com.example.eugene.votetaworkout.R;
 import com.example.eugene.votetaworkout.model.*;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;

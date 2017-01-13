@@ -1,4 +1,4 @@
-package com.example.eugene.votetaworkout;
+package com.example.eugene.votetaworkout.dao;
 
 import android.content.Context;
 import com.example.eugene.votetaworkout.database.DatabaseHelper;
@@ -25,6 +25,7 @@ public class ExerciseInstanceDao extends BaseDaoImpl<ExerciseInstance, Integer> 
     }
 
     public List<ExerciseInstance> getExerciseInstancesByWorkout(Workout workout, Context context) throws SQLException {
+        //ToDo: fix this with DI
         Dao<WorkoutExerciseInstance, Integer> workoutExerciseInstanceDao = DatabaseHelper.getDatabaseHelper(context).getDao(WorkoutExerciseInstance.class);
         QueryBuilder<WorkoutExerciseInstance, Integer> queryBuilder = workoutExerciseInstanceDao.queryBuilder();
         queryBuilder.selectColumns("exercise_instance_id");
