@@ -63,13 +63,6 @@ public class ExercisePickFragment extends Fragment {
         listener.onExerciseSelected(id);
     }
 
-    private GridView.OnItemClickListener onExerciseClickListener = new GridView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-            listener.onExerciseSelected(id);
-        }
-    };
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

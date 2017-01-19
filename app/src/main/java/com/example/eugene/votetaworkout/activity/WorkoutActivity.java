@@ -43,6 +43,8 @@ public class WorkoutActivity extends AppCompatActivity {
     private long startTime = 0L;
     private boolean exerciseStarted;
 
+    List<ExerciseInstance> instances;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +55,7 @@ public class WorkoutActivity extends AppCompatActivity {
         try {
             Workout workout = DatabaseHelper.getDatabaseHelper(this).getWorkoutDao().queryForId((int)workoutId);
             ExerciseInstanceDao exerciseInstanceDao = DatabaseHelper.getDatabaseHelper(this).getExerciseInstanceDao();
-            List<ExerciseInstance> instances = exerciseInstanceDao.getExerciseInstancesByWorkout(workout, getApplicationContext());
+            instances = exerciseInstanceDao.getExerciseInstancesByWorkout(workout, getApplicationContext());
 
             ExerciseInstanceListAdapter adapter = new ExerciseInstanceListAdapter(this, instances);
             workoutsListView.setAdapter(adapter);
@@ -85,11 +87,10 @@ public class WorkoutActivity extends AppCompatActivity {
             int secs = (int) (timeInMilliseconds / 1000);
             int mins = secs / 60;
             secs = secs % 60;
-            int milliseconds = (int) (timeInMilliseconds % 1000);
-            timerValue.setText("" + mins + ":"
-                            + String.format("%02d", secs) + ":"
-                            + String.format("%03d", milliseconds));
-            customHandler.postDelayed(this, 0);
+            int milliseconds = (int) (timeInMilliseconds % 1000) / 10;
+
+            timerValue.setText(String.format("%02d:%02d:%02d", mins, secs, milliseconds));
+            customHandler.postDelayed(this, 10);
         }
     };
 }
