@@ -10,6 +10,9 @@
     <string name="sets_error_message">Sets field should not be empty</string>
     <string name="reps_error_message">Reps field should not be empty</string>
     <string name="weight_error_message">Weight field should not be empty</string>
+    <string name="workout_name_error_message">Workout name should not be empty</string>
+
+    <string name="workout_name">Workout name</string>
 
     <string name="title_activity_category_pick">CategoryPickActivity</string>
 

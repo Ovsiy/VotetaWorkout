@@ -6,13 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".activity.AddWorkoutActivity">
 
+    <TextView
+        android:id="@+id/workout_name_textview"
+        android:text="@string/workout_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignBottom="@+id/workout_name"
+        android:textAppearance="@android:style/TextAppearance"
+        android:gravity="center"/>
+
+    <EditText
+        android:id="@+id/workout_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text|textShortMessage"
+        android:text="My workout"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/workout_name_textview"
+        />
+
     <GridView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/exercise_instances_grid"
         android:numColumns="3"
         android:choiceMode="multipleChoiceModal"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/workout_name_textview"/>
 
     <RelativeLayout
         android:id="@+id/buttons_placeholder"
@@ -43,6 +65,8 @@
             android:layout_marginEnd="@dimen/text_margin"/>
 
     </RelativeLayout>
+
+
 
 
 </RelativeLayout>

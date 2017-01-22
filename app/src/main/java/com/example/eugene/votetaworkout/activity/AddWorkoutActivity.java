@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.View;
 import android.widget.*;
@@ -38,6 +39,9 @@ public class AddWorkoutActivity extends AppCompatActivity {
 
     @BindView(R.id.button_save_workout)
     FloatingActionButton saveWorkoutButton;
+
+    @BindView(R.id.workout_name)
+    EditText workoutName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,8 +114,14 @@ public class AddWorkoutActivity extends AppCompatActivity {
             return;
         }
 
+        if (TextUtils.isEmpty(workoutName.getText())) {
+            workoutName.setError(getString(R.string.workout_name_error_message));
+            workoutName.requestFocus();
+            return;
+        }
+
         Workout workout = new Workout();
-        workout.setName("Workout1");
+        workout.setName(workoutName.getText().toString());
 
         try {
             Dao<Workout, Integer> workoutDao = DatabaseHelper.getDatabaseHelper(this).getWorkoutDao();

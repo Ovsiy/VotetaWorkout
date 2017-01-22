@@ -15,7 +15,7 @@ import java.util.List;
  * @since 24.08.2016
  */
 @DatabaseTable(tableName = "category")
-public class Category {
+public class Category implements Model {
     @DatabaseField(columnName = "id", generatedId = true)
     private int id;
 

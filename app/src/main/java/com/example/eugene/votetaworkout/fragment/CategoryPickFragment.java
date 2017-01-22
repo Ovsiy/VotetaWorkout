@@ -63,7 +63,7 @@ public class CategoryPickFragment extends Fragment {
             e.printStackTrace();
         }
 
-        CategoryAdapter adapter = new CategoryAdapter(categories, getActivity());
+        CategoryAdapter adapter = new CategoryAdapter(getActivity(), categories);
 
         categoriseGridView.setAdapter(adapter);
     }

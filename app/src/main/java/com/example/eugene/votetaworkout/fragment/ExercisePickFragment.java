@@ -53,7 +53,7 @@ public class ExercisePickFragment extends Fragment {
             e.printStackTrace();
         }
 
-        ExerciseAdapter adapter = new ExerciseAdapter(exercises, getActivity());
+        ExerciseAdapter adapter = new ExerciseAdapter(getActivity(), exercises);
 
         exerciseGridView.setAdapter(adapter);
     }

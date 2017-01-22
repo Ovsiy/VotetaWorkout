@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,13 +16,10 @@ import java.util.List;
  * @author Eugene
  * @since 1/5/2017.
  */
-public class CategoryAdapter extends BaseAdapter {
-    private List<Category> categories;
-    private Context context;
+public class CategoryAdapter extends BaseAdapter<Category> {
 
-    public CategoryAdapter(List<Category> categories, Context context) {
-        this.categories = categories;
-        this.context = context;
+    public CategoryAdapter(Context context, List<Category> categories) {
+        super(context, categories);
     }
 
     static class ViewHolder {
@@ -54,20 +50,5 @@ public class CategoryAdapter extends BaseAdapter {
         viewHolder.categoryLabel.setText(category.getName());
 
         return convertView;
-    }
-
-    @Override
-    public int getCount() {
-        return categories.size();
-    }
-
-    @Override
-    public Category getItem(int position) {
-        return categories.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return getItem(position).getId();
     }
 }

@@ -12,7 +12,7 @@ import com.j256.ormlite.table.DatabaseTable;
  * @since 24.08.2016
  */
 @DatabaseTable(tableName = "exercise")
-public class Exercise {
+public class Exercise implements Model {
     @DatabaseField(columnName = "id", generatedId = true)
     private int id;
 

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,13 +16,9 @@ import java.util.List;
  * @author Eugene
  * @since 1/6/2017.
  */
-public class ExerciseInstanceAdapter extends BaseAdapter {
-    private Context context;
-    private List<ExerciseInstance> instances;
-
+public class ExerciseInstanceAdapter extends BaseAdapter<ExerciseInstance> {
     public ExerciseInstanceAdapter(Context context, List<ExerciseInstance> instances) {
-        this.context = context;
-        this.instances = instances;
+       super(context, instances);
     }
 
     static class ViewHolder {
@@ -67,20 +62,5 @@ public class ExerciseInstanceAdapter extends BaseAdapter {
         viewHolder.weight.setText(String.valueOf(instance.getWeight()));
 
         return convertView;
-    }
-
-    @Override
-    public int getCount() {
-        return instances.size();
-    }
-
-    @Override
-    public ExerciseInstance getItem(int position) {
-        return instances.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return getItem(position).getId();
     }
 }
