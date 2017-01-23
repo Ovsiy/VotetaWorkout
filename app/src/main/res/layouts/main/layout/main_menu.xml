@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="240dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".activity.MainActivity">
+
+    <TextView
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/app_name"
+        android:id="@+id/textView"
+        android:layout_height="80dp"
+        android:layout_width="fill_parent"
+        android:gravity="center"/>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="80dp"
+        android:text="@string/go"
+        android:id="@+id/goButton"/>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="80dp"
+        android:text="@string/my_workouts"
+        android:id="@+id/myWorkoutsButton"/>
+
+    <Button
+        android:layout_height="80dp"
+        android:layout_width="fill_parent"
+        android:text="@string/about"
+        android:id="@+id/aboutButton"/>
+
+    <Button
+        android:text="@string/exit"
+        android:id="@+id/exitButton"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"/>
+
+</LinearLayout>
