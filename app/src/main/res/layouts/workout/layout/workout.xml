@@ -1,5 +1,4 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
               android:id="@+id/workout"
               android:layout_weight="2"
               android:layout_width="match_parent"
@@ -14,13 +13,13 @@
         android:layout_gravity="center"
         android:textAppearance="?android:attr/textAppearanceLarge"/>
 
-    <ListView
-        android:id="@+id/workouts_list"
+    <LinearLayout
+        android:id="@+id/list_workouts"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        tools:listitem="@layout/exercise_instance_item"
         android:layout_weight="1">
-    </ListView>
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -39,15 +38,6 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"/>
 
-        <TextView
-            android:id="@+id/timerValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="40sp"
-            android:text="00:00:00"
-            android:layout_below="@+id/exercise_label"
-            android:layout_centerHorizontal="true"/>
-
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -55,7 +45,41 @@
             android:id="@+id/start_button"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="30dp"/>
+            android:layout_marginBottom="19dp"/>
+
+        <TextView
+            android:id="@+id/timer_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="40sp"
+            android:text="00:00:00"
+            android:layout_above="@+id/start_button"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="18dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/exercise_label"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:id="@+id/sets_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Sets left: "
+                />
+
+            <TextView
+                android:id="@+id/sets_left_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="2"/>
+        </LinearLayout>
+
 
     </RelativeLayout>
 </LinearLayout>
