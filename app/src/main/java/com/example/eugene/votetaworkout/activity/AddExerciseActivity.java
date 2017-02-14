@@ -8,7 +8,7 @@ import com.example.eugene.votetaworkout.fragment.CategoryPickFragment;
 import com.example.eugene.votetaworkout.fragment.ExerciseFormFragment;
 import com.example.eugene.votetaworkout.fragment.ExercisePickFragment;
 
-public class AddExerciseActivity extends AppCompatActivity implements ExercisePickFragment.OnExerciseSelected, CategoryPickFragment.OnCategorySelected {
+public class AddExerciseActivity extends BaseActivity implements ExercisePickFragment.OnExerciseSelected, CategoryPickFragment.OnCategorySelected {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

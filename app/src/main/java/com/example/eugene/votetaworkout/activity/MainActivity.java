@@ -3,6 +3,7 @@ package com.example.eugene.votetaworkout.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.example.eugene.votetaworkout.R;
@@ -13,7 +14,7 @@ import com.example.eugene.votetaworkout.R;
  * @author Eugene Ovsiy
  * @since 24.08.2016
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

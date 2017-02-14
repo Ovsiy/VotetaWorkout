@@ -23,7 +23,7 @@ import java.util.List;
  * @author Eugene
  * @since 1/9/2017.
  */
-public class GoActivity extends AppCompatActivity {
+public class GoActivity extends BaseActivity {
     @BindView(R.id.workouts_list)
     ListView workoutsListView;
 

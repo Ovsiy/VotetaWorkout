@@ -33,7 +33,7 @@ import java.util.ListIterator;
  * @author Eugene
  * @since 1/9/2017.
  */
-public class WorkoutActivity extends AppCompatActivity {
+public class WorkoutActivity extends BaseActivity {
     @BindView(R.id.timer_value)
     TextView timerValue;
 
@@ -82,8 +82,13 @@ public class WorkoutActivity extends AppCompatActivity {
             sets = instance.getSets();
 
             addExerciseToLayout(instances.get(0));
-            addExerciseToLayout(instances.get(1));
-            addExerciseToLayout(instances.get(2));
+            if (instances.size() > 1) {
+                addExerciseToLayout(instances.get(1));
+            }
+            if (instances.size() > 2) {
+                addExerciseToLayout(instances.get(2));
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -106,6 +111,23 @@ public class WorkoutActivity extends AppCompatActivity {
             startButton.setImageResource(R.drawable.ic_play_arrow_black_48dp);
             startButton.clearAnimation();
             setsLeftValue.setText(String.valueOf(sets));
+
+            if (setEnded && !iterator.hasNext()) {
+                new AlertDialog.Builder(this)
+                        .setTitle("Congratulations!")
+                        .setMessage("You have finished your workout")
+                        .setCancelable(false)
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(intent);
+                            }
+                        })
+                        .show();
+
+                return;
+            }
         }
     }
 
@@ -124,23 +146,6 @@ public class WorkoutActivity extends AppCompatActivity {
     };
 
     private void handleSetsLogic() {
-        if (setEnded && !iterator.hasNext()) {
-            new AlertDialog.Builder(this)
-                    .setTitle("Congratulations!")
-                    .setMessage("You have finished your workout")
-                    .setCancelable(false)
-                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                            startActivity(intent);
-                        }
-                    })
-                    .show();
-
-            return;
-        }
-
         if (iterator.previousIndex() == 0) {
             exercisesListLayout.getChildAt(0).setBackgroundColor(Color.RED);
         }
@@ -161,7 +166,10 @@ public class WorkoutActivity extends AppCompatActivity {
             exercisesListLayout.getChildAt(0).setBackgroundColor(Color.TRANSPARENT);
             exercisesListLayout.getChildAt(1).setBackgroundColor(Color.RED);
             iterator2.next();
-            iterator2.next();
+            if (iterator2.hasNext()) {
+                iterator2.next();
+            }
+
         } else if (iterator2.hasNext()) {
             final View previous = exercisesListLayout.getChildAt(0);
             final View current = exercisesListLayout.getChildAt(1);

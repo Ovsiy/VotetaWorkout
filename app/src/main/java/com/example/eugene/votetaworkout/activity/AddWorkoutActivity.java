@@ -27,7 +27,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class AddWorkoutActivity extends AppCompatActivity {
+public class AddWorkoutActivity extends BaseActivity {
 
     private Set<ExerciseInstance> selectedInstances = new HashSet<>();
 
