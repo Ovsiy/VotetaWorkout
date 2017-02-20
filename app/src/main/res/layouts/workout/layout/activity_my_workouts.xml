@@ -23,7 +23,7 @@
             tools:listitem="@layout/workout_listview"
             android:layout_below="@+id/textView"
             android:layout_alignParentStart="true"
-            android:layout_above="@+id/button_new_workout">
+            android:layout_alignBottom="@+id/button_new_workout">
     </ListView>
 
     <android.support.design.widget.FloatingActionButton
